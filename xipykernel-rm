@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+
+local root="$HOME/python/ipykernel-venvs"
+local venv_name=$1
+local venv_dir=$root"/"$venv_name
+local venv_activate=$venv_dir"/bin/activate"
+
+if [ -z $venv_name ]; then
+  echo "missing virtual environment name as an argument"
+  exit 1
+fi
+
+if [ ! -f $venv_activate ]; then
+  echo "virtual environment\" "$venv_name "\"not exists"
+  exit 1
+fi
+
+source $venv_activate
+pip install jupyter-client
+jupyter-kernelspec uninstall $venv_name -y;
+
+if [ $VIRTUAL_ENV_PROMPT = $venv_name ]; then
+  deactivate;
+fi
+
+rm -rf $venv_dir

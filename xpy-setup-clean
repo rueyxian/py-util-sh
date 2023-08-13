@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+source xipykernel-rm-all -y
+source xjupyter-rm
+pipx uninstall-all
+brew uninstall pipx
+brew uninstall python

@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+envs=$(jupyter-kernelspec list 2> /dev/null | grep -E "\w*   .*" )
+
+# https://zsh.sourceforge.io/Guide/zshguide05.html) 
+arr=(${(f)envs})  
+
+for venv in "${arr[@]}"; do 
+  echo $venv; 
+done
+
+

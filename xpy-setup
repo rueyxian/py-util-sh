@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+brew install python
+brew install pipx
+
+pipx install virtualenv
+pipx install jupyter-client
+pipx install poetry
+

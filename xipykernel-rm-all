@@ -1,0 +1,30 @@
+#!/usr/bin/env zsh
+
+local root="$HOME/python/ipykernel-venvs"
+
+envs=$(jupyter-kernelspec list 2> /dev/null | grep -Eo "  \w*   " | grep -Eo "\w*")
+
+# https://zsh.sourceforge.io/Guide/zshguide05.html) 
+arr=(${(f)envs})  
+
+for venv in "${arr[@]}"; do 
+
+  if [ -z $1 ]; then
+    jupyter-kernelspec uninstall $venv;
+  elif [ $1 = "-y" ]; then
+    jupyter-kernelspec uninstall $venv -y;
+  else
+    echo "invalid argument"
+    exit 1
+  fi
+
+  if [ $VIRTUAL_ENV_PROMPT = $venv ]; then
+    deactivate
+  fi
+
+  local venv_dir=$root"/"$venv
+  rm -rf $venv_dir
+
+done
+
+

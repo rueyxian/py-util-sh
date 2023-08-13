@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+local root="$HOME/python"
+local venv_name="jupyter-rt-venv"
+local venv_dir=$root"/"$venv_name
+
+echo $venv_dir
+
+if [ ! -d $venv_dir ]; then
+  echo "has already removed"
+  exit 1;
+fi
+
+rm -rf $venv_dir
