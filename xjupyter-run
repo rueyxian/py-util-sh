@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+local root="$HOME/python"
+local venv_name="jupyter-rt-venv"
+local venv_dir=$root"/"$venv_name
+local venv_activate=$venv_dir"/bin/activate"
+
+if [ ! -d $root ]; then
+  mkdir $root
+fi
+
+if [ -f $venv_activate ]; then
+  source $venv_activate
+else
+  # https://jupyter.org/install
+  # https://github.com/jupyter-lsp/jupyterlab-lsp
+  virtualenv $venv_dir
+  source $venv_activate
+  pip install jupyterlab
+  pip install jupyterlab-lsp
+  pip install 'python-lsp-server[all]'
+fi
+
+jupyter-lab
